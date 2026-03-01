@@ -1,0 +1,71 @@
+plugins {
+    id("multiloader-loader")
+    id("net.neoforged.moddev.legacyforge")
+}
+
+// Variables for cleaner code
+val modId = property("mod_id").toString()
+
+mixin {
+    // USE .get() HERE to fix the casting error
+    add(sourceSets.main.get(), "$modId.refmap.json")
+
+    config("$modId.mixins.json")
+    config("$modId.forge.mixins.json")
+}
+
+legacyForge {
+    version = "${property("minecraft_version")}-${property("forge_version")}"
+
+    validateAccessTransformers = true
+
+    val at = project(":common").file("src/main/resources/META-INF/accesstransformer.cfg")
+    if (at.exists()) {
+        accessTransformers.from(at)
+    }
+
+    parchment {
+        minecraftVersion = property("parchment_minecraft").toString()
+        mappingsVersion = property("parchment_version").toString()
+    }
+
+    runs {
+        create("client") {
+            client()
+        }
+        create("data") {
+            data()
+            programArguments.addAll(
+                "--mod", modId,
+                "--all",
+                "--output", file("src/generated/resources/").absolutePath,
+                "--existing", file("src/main/resources/").absolutePath
+            )
+        }
+        create("server") {
+            server()
+        }
+    }
+
+    mods {
+        create(modId) {
+            sourceSet(sourceSets.main.get())
+        }
+    }
+}
+
+sourceSets.main.get().resources.srcDir("src/generated/resources")
+
+dependencies {
+    compileOnly(project(":common"))
+    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+}
+
+tasks.jar {
+    finalizedBy("reobfJar")
+    manifest {
+        attributes(
+            "MixinConfigs" to "$modId.mixins.json,$modId.forge.mixins.json"
+        )
+    }
+}
