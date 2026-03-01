@@ -1,7 +1,7 @@
-package com.example.examplemod.platform;
+package net.kuko.alwaystrader.platform;
 
-import com.example.examplemod.Constants;
-import com.example.examplemod.platform.services.IPlatformHelper;
+import net.kuko.alwaystrader.Constants;
+import net.kuko.alwaystrader.platform.services.IPlatformHelper;
 
 import java.util.ServiceLoader;
 

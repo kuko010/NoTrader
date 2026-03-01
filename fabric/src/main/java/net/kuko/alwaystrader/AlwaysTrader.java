@@ -1,8 +1,8 @@
-package com.example.examplemod;
+package net.kuko.alwaystrader;
 
 import net.fabricmc.api.ModInitializer;
 
-public class ExampleMod implements ModInitializer {
+public class AlwaysTrader implements ModInitializer {
     
     @Override
     public void onInitialize() {

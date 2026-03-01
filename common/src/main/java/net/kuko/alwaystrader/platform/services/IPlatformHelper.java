@@ -1,4 +1,4 @@
-package com.example.examplemod.platform.services;
+package net.kuko.alwaystrader.platform.services;
 
 public interface IPlatformHelper {
 

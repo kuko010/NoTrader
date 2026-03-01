@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "mod_id",
+    "id": "${mod_id}",
     "version": "${version}",
     "name": "${mod_name}",
     "description": "${description}",
@@ -9,14 +9,14 @@
     ],
     "contact": {
         "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
+        "sources": "https://github.com/kuko010/AlwaysTrader"
     },
     "license": "${license}",
     "icon": "assets/modid/${mod_id}.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.example.examplemod.ExampleMod"
+            "net.kuko.alwaystrader.AlwaysTrader"
         ]
     },
     "mixins": [
@@ -25,7 +25,6 @@
     ],
     "depends": {
         "fabricloader": ">=0.14",
-        "fabric": "*",
         "minecraft": "${minecraft_version}",
         "java": ">=17"
     },
